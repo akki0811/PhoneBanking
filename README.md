@@ -53,7 +53,7 @@ Donna	OnePlus3T	4000	NULL
 
 ***********************************************************************************************
 
-Currently, working on transforming the project in Spring framework		
+		
 
 
 

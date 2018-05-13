@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.wildcard.phoneBanking.model.Transaction;
 import com.wildcard.phoneBanking.model.User;
 import com.wildcard.phoneBanking.model.VirtualDB;
-import com.wildcard.phoneBanking.svc.SMSHandler;
 import com.wildcard.phoneBanking.svc.impl.SMSUtility;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PhoneBankingController {
 	
@@ -22,10 +23,13 @@ public class PhoneBankingController {
 	 
 	public static void main(String[] args) {
 		slf4jLogger.info("Inside PhoneBankingController.main method");
+		
 		/* Application level connection factory object
 		 * This object will work as application wide instance to virtual database
 		 */
-		initateDB();						
+		initateDB();	
+		//Initiating Application Context to inject dependency via XML 
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		
 		// For user interaction and input
 		Scanner sc= new Scanner(System.in);
@@ -44,9 +48,9 @@ public class PhoneBankingController {
 					System.out.println("[EXAMPLE : BALANCE, SEND-100-USERNAME]");
 					String command = sc.nextLine();
 					if(!command.isEmpty()){
-						SMSHandler smsHandler = new SMSUtility();
 						// SMS Utility handler for all incoming messages
-						String response = smsHandler.handleSmsRequest(command,device);
+						SMSUtility smsUtility = (SMSUtility) context.getBean("SMSUtility");
+						String response = smsUtility.handleSmsRequest(command,device);
 						System.out.println(response);
 						System.out.println("Do u wish to continue.\nPress N/n to exit and Y/y to continue");
 						choice=sc.nextLine();
@@ -69,6 +73,7 @@ public class PhoneBankingController {
 		}while(flag);
 		if(sc!=null){
 			sc.close();
+			((ClassPathXmlApplicationContext) context).close();
 		}
 	}
 	

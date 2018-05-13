@@ -6,18 +6,25 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.wildcard.phoneBanking.model.VirtualDB;
 import com.wildcard.phoneBanking.svc.SMSHandler;
 import com.wildcard.phoneBanking.svc.TransferManager;
-
+@Service
 public class SMSUtility implements SMSHandler{
 	private static final Logger slf4jLogger = LoggerFactory.getLogger(SMSUtility.class);
 
+	@Autowired
+	private UserManagerImpl userUtility;
+	
+	@Autowired
+	private TransferManager tranMgr;
+	
 	public SMSUtility(){
 	}
 	
-	@Override
 	public String handleSmsRequest(String smsContent, String senderDeviceId) {
 		slf4jLogger.info("Inside SMSUtility.handleSmsRequest method");
 		String response="";
@@ -27,7 +34,6 @@ public class SMSUtility implements SMSHandler{
 		
 		if(VirtualDB.loggedInUser !=null){
 			slf4jLogger.info("User Info pulled : "+VirtualDB.loggedInUser.getName());
-		UserManagerImpl userUtility = new UserManagerImpl();
 		// Processing input command
 		String[] smsContents = smsContent.split("-");
 		switch(smsContents.length){
@@ -48,11 +54,9 @@ public class SMSUtility implements SMSHandler{
 							break;
 						}
 						// Accessing BE services for transfer management
-						TransferManager tranMgr = new TransferManagerImpl();
 						tranMgr.sendMoney(VirtualDB.loggedInUser.getName(), smsContents[2], amt);
 						
 					}else if("TOTAL".equalsIgnoreCase(smsContents[0]) && "SENT".equalsIgnoreCase(smsContents[1])){
-						TransferManager tranMgr = new TransferManagerImpl();
 						List<BigDecimal> allTransactions = tranMgr.getAllTransactions(VirtualDB.loggedInUser.getName(), smsContents[2]);
 						BigDecimal bdec = new BigDecimal(0);
 						MathContext mathContext = new MathContext(4);
@@ -72,7 +76,6 @@ public class SMSUtility implements SMSHandler{
 		case 4: //  Check if user exists in the DB
 				if(userUtility.existsUser(smsContents[2]) && userUtility.existsUser(smsContents[3])){
 					if("TOTAL".equalsIgnoreCase(smsContents[0]) && "SENT".equalsIgnoreCase(smsContents[1])){
-						TransferManager tranMgr = new TransferManagerImpl();
 						List<BigDecimal> allTransactions = tranMgr.getAllTransactions(VirtualDB.loggedInUser.getName(), smsContents[2]);
 						BigDecimal bdec1 = new BigDecimal(0);
 						BigDecimal bdec2 = new BigDecimal(0);

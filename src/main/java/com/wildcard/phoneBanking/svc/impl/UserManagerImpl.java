@@ -5,14 +5,15 @@ import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.wildcard.phoneBanking.model.User;
 import com.wildcard.phoneBanking.model.VirtualDB;
 import com.wildcard.phoneBanking.svc.UserManager;
-
+@Service
 public class UserManagerImpl implements UserManager{
 	private static final Logger slf4jLogger = LoggerFactory.getLogger(UserManagerImpl.class);
-	@Override
+	
 	public boolean existsUser(String username) {
 		slf4jLogger.info("Inside UserManagerImpl.existsUser method");
 		for(Entry<String,User> entry : VirtualDB.virtualdb.entrySet()){
@@ -23,7 +24,6 @@ public class UserManagerImpl implements UserManager{
 		return false;
 	}
 
-	@Override
 	public BigDecimal getBalance(String username) {
 		slf4jLogger.info("Inside UserManagerImpl.getBalance method");
 		for(Entry<String,User> entry : VirtualDB.virtualdb.entrySet()){
@@ -34,7 +34,6 @@ public class UserManagerImpl implements UserManager{
 		return null;
 	}
 
-	@Override
 	public String getUserNameForDeviceId(String deviceId) {
 		slf4jLogger.info("Inside UserManagerImpl.getUserNameForDeviceId method");
 		for(Entry<String,User> entry : VirtualDB.virtualdb.entrySet()){

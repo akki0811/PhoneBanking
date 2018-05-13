@@ -1,5 +1,8 @@
 package com.wildcard.phoneBanking.svc;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public interface SMSHandler {
 	/**
 	 * @param smsContent the incoming SMS command string.
