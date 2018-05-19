@@ -2,7 +2,6 @@ package com.wildcard.phoneBanking.model;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 public class User {
 
 	String name;

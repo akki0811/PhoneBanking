@@ -10,14 +10,15 @@ import org.springframework.stereotype.Service;
 import com.wildcard.phoneBanking.model.User;
 import com.wildcard.phoneBanking.model.VirtualDB;
 import com.wildcard.phoneBanking.svc.UserManager;
+
 @Service
-public class UserManagerImpl implements UserManager{
+public class UserManagerImpl implements UserManager {
 	private static final Logger slf4jLogger = LoggerFactory.getLogger(UserManagerImpl.class);
-	
-	public boolean existsUser(String username) {
+
+	public boolean existsUser(String userName) {
 		slf4jLogger.info("Inside UserManagerImpl.existsUser method");
-		for(Entry<String,User> entry : VirtualDB.virtualdb.entrySet()){
-			if(entry.getValue().getName().equalsIgnoreCase(username)){
+		for (Entry<String, User> entry : VirtualDB.virtualdb.entrySet()) {
+			if (entry.getValue().getName().equalsIgnoreCase(userName)) {
 				return true;
 			}
 		}
@@ -26,8 +27,8 @@ public class UserManagerImpl implements UserManager{
 
 	public BigDecimal getBalance(String username) {
 		slf4jLogger.info("Inside UserManagerImpl.getBalance method");
-		for(Entry<String,User> entry : VirtualDB.virtualdb.entrySet()){
-			if(entry.getValue().getName().equalsIgnoreCase(username)){
+		for (Entry<String, User> entry : VirtualDB.virtualdb.entrySet()) {
+			if (entry.getValue().getName().equalsIgnoreCase(username)) {
 				return entry.getValue().getBalance();
 			}
 		}
@@ -36,21 +37,21 @@ public class UserManagerImpl implements UserManager{
 
 	public String getUserNameForDeviceId(String deviceId) {
 		slf4jLogger.info("Inside UserManagerImpl.getUserNameForDeviceId method");
-		for(Entry<String,User> entry : VirtualDB.virtualdb.entrySet()){
-			if(entry.getKey().equalsIgnoreCase(deviceId)){
+		for (Entry<String, User> entry : VirtualDB.virtualdb.entrySet()) {
+			if (entry.getKey().equalsIgnoreCase(deviceId)) {
 				return entry.getValue().getName();
 			}
 		}
 		return null;
 	}
-	
+
 	public User getUser(String username) {
-		for(Entry<String,User> entry : VirtualDB.virtualdb.entrySet()){
-			if(entry.getValue().getName().equalsIgnoreCase(username)){
+		for (Entry<String, User> entry : VirtualDB.virtualdb.entrySet()) {
+			if (entry.getValue().getName().equalsIgnoreCase(username)) {
 				return entry.getValue();
 			}
 		}
 		return null;
 	}
-	
+
 }

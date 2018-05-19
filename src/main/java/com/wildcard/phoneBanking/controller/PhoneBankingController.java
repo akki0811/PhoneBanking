@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.wildcard.phoneBanking.model.Transaction;
 import com.wildcard.phoneBanking.model.User;
 import com.wildcard.phoneBanking.model.VirtualDB;
-import com.wildcard.phoneBanking.svc.impl.SMSUtility;
+import com.wildcard.phoneBanking.svc.SMSHandler;
 
 public class PhoneBankingController {
 	
@@ -49,7 +49,7 @@ public class PhoneBankingController {
 					String command = sc.nextLine();
 					if(!command.isEmpty()){
 						// SMS Utility handler for all incoming messages
-						SMSUtility smsUtility = (SMSUtility) context.getBean("SMSUtility");
+						SMSHandler smsUtility = (SMSHandler) context.getBean("smsUtility");
 						String response = smsUtility.handleSmsRequest(command,device);
 						System.out.println(response);
 						System.out.println("Do u wish to continue.\nPress N/n to exit and Y/y to continue");

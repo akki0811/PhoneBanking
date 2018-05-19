@@ -18,10 +18,10 @@ import com.wildcard.phoneBanking.model.User;
 import com.wildcard.phoneBanking.model.VirtualDB;
 import com.wildcard.phoneBanking.svc.impl.UserManagerImpl;
 
-public class SMSUtilityTest{
-	private static final Logger slf4jLogger = LoggerFactory.getLogger(SMSUtilityTest.class);
+public class SmsUtilityTest{
+	private static final Logger slf4jLogger = LoggerFactory.getLogger(SmsUtilityTest.class);
 
-	public SMSUtilityTest(){
+	public SmsUtilityTest(){
 	}
 	
 	@Test

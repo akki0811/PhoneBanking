@@ -1,7 +1,6 @@
 package com.wildcard.phoneBanking.model;
 
 import java.math.BigDecimal;
-
 public class Transaction {
 
 	String senderName;

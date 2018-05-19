@@ -13,10 +13,10 @@ public class PhoneBankingTestSuite extends Runner  {
 	@RunWith(PhoneBankingTestSuite.class)
 
 	@Suite.SuiteClasses({ 
-		SMSUtilityTest.class,TransferManagerImplTest.class,UserManagerImplTest.class
+		SmsUtilityTest.class,TransferManagerImplTest.class,UserManagerImplTest.class
 	})
 
-	public class SMSUtilityTest {
+	public class SmsUtilityTest {
 	}
 
 	@Override
