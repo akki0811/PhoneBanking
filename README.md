@@ -53,7 +53,7 @@ Donna	OnePlus3T	4000	NULL
 
 ***********************************************************************************************
 
-Project has been migrated to Spring Framework with Aspect Oriented Programming		
+Project has been migrated to Spring Framework with Aspect Oriented Programming.		
 
 
 
