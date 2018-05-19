@@ -5,14 +5,14 @@ Example Requests
 SMS Command	       Example response           	Notes
 BALANCE	                 1500	                      Returns your balance in EUR
 SEND-100-FFRITZ	         OK	                      Send 100 EUR to user with username FFRITZ
-SEND-100-FFRITZ	         ERR – INSUFFICIENT FUNDS     User hasn’t got enough money to make the transfer
-SEND-100-FFRITZ	         ERR – NO USER	              System can’t find the user with username FFRITZ
+SEND-100-FFRITZ	         ERR â€“ INSUFFICIENT FUNDS     User hasnâ€™t got enough money to make the transfer
+SEND-100-FFRITZ	         ERR â€“ NO USER	              System canâ€™t find the user with username FFRITZ
 TOTAL-SENT-FFRITZ        560	                      Get the total amount sent so far to user FFRITZ
 TOTAL-SENT-FFRITZ-MSMITH 560,250	              Get the total amounts sent to users FFRITZ and MSMITH as a comma 
                                                       separated list.
-TOTAL-SENT-FFRITZ-MSMITH ERR – NO USER	              Either the system cannot find the user FFRITZ or the system cannot 
+TOTAL-SENT-FFRITZ-MSMITH ERR â€“ NO USER	              Either the system cannot find the user FFRITZ or the system cannot 
                                                       find MSMITH
-XYZ	                 ERR – UNKNOWN COMMAND	      The command was not recognized.
+XYZ	                 ERR â€“ UNKNOWN COMMAND	      The command was not recognized.
 
 
 ***********************************************************************************************************
@@ -32,7 +32,7 @@ The module you are implementing should have the following interface entry point:
 public interface SMSHandler {
 	/**
 * @param smsContent the incoming SMS command string.
-* @param senderDeviceId is a unique string that uniquely identifies the customer’s mobile device. The UserManager proves a means to identify the sender user.
+* @param senderDeviceId is a unique string that uniquely identifies the customerâ€™s mobile device. The UserManager proves a means to identify the sender user.
 * @return The SMS content that should be returned to the user.
 */
 String handleSmsRequest(String smsContent, String senderDeviceId);
@@ -53,7 +53,7 @@ Donna	OnePlus3T	4000	NULL
 
 ***********************************************************************************************
 
-		
+Project has been migrated to Spring Framework with Aspect Oriented Programming		
 
 
 
